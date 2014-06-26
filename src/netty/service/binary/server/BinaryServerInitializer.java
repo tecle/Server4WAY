@@ -2,7 +2,7 @@ package netty.service.binary.server;
 import java.util.concurrent.TimeUnit;
 
 import netty.service.binary.handler.BinaryServerHeartInHandler;
-import netty.service.binary.handler.BinaryServerInboundHandler;
+import netty.service.binary.handler.BinaryServerMainHandler;
 import netty.service.binary.handler.BinaryServerOutboundHandler;
 import netty.service.decoder.BinaryRequestDecoder;
 import netty.service.encoder.BinaryResponseEncoder;
@@ -24,7 +24,7 @@ public class BinaryServerInitializer extends ChannelInitializer<SocketChannel> {
         // server端接收到的是httpRequest，所以要使用HttpRequestDecoder进行解码 
         ch.pipeline().addLast("decoder", new BinaryRequestDecoder());  
         ch.pipeline().addLast("heart", new BinaryServerHeartInHandler());//心跳处理
-        ch.pipeline().addLast("inHandler", new BinaryServerInboundHandler());
+        ch.pipeline().addLast("inHandler", new BinaryServerMainHandler());
         
 	}  
 

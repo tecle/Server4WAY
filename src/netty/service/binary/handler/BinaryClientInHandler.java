@@ -3,6 +3,12 @@ package netty.service.binary.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import way.service.bean.User;
+import way.service.bean.Users;
+import way.service.logic.WayService;
+import way.service.util.MsgCode;
+import way.service.util.String2Model;
+
 import netty.service.message.BinaryRequestMessage;
 import netty.service.message.BinaryResponseMessage;
 import io.netty.channel.ChannelHandlerContext;
@@ -10,16 +16,14 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
-public class BinaryServerInboundHandler extends ChannelInboundHandlerAdapter {
+public class BinaryClientInHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println("read:" + (BinaryRequestMessage) msg);
-		BinaryResponseMessage response = new BinaryResponseMessage();
-		response.setEncode((byte) 0);
-		response.setEncrypt((byte) 0);
-		response.setResult(((BinaryRequestMessage) msg).getCommand());
-		ctx.write(response);
-		// ctx.fireChannelRead(obj)
+		System.out.println("read:" + (BinaryResponseMessage) msg);
+		Users users = String2Model.json2Users(((BinaryResponseMessage) msg)
+				.getValue("users"));
+		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
+		System.out.println(users.toString());
 	}
 
 	@Override
@@ -34,7 +38,7 @@ public class BinaryServerInboundHandler extends ChannelInboundHandlerAdapter {
 			} else if (event.state().equals(IdleState.WRITER_IDLE)) {
 				System.out.println("WRITER_IDLE");
 				ctx.writeAndFlush("ping");
-			} 
+			}
 		}
 		super.userEventTriggered(ctx, evt);
 	}
