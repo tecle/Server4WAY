@@ -4,6 +4,7 @@ public class User {
 	private String name;
 	private String pw;
 	private String nick;
+	private String datetime;
 	private char sex;
 	private int id;
 
@@ -47,9 +48,19 @@ public class User {
 		return id;
 	}
 
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
+	}
+
+	public String getDatetime() {
+		return datetime;
+	}
+
 	@Override
 	public String toString() {
-		return "[id=" + id + ",name=" + name + ",pw=" + pw + ",nick=" + nick
-				+ ",sex=" + sex + "]";
+		return String.format(
+				"[id=%s, name=%s, pw=%s, nick=%s, sex=%s, datetime=%s]", id,
+				name, pw, nick, sex, datetime);
 	}
+
 }

@@ -43,6 +43,15 @@ public class MsgCode{
 	public final static int OPERATE_FRIEND_REQ_ADD = 113;
 	public final static int OPERATE_FRIEND_REQ_IGNORE = 213;
 	
+	//delete friend
+	public final static int DELETE_FRIEND = 14;
+	public final static int DELETE_FRIEND_SUCESS = 114;
+	public final static int DELETE_FRIEND_FAILED = 214;
+	
+	//get friends
+	public final static int GET_FRIENDS = 15;
+	public final static int GET_FRIENDS_SUCCESS = 115;
+	public final static int GET_FRIENDS_FAILED = 215;
 	
 	//server request********************************************
 	//friend tip

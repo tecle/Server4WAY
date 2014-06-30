@@ -1,6 +1,7 @@
 package netty.service.binary.server;
 
 
+
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
@@ -117,13 +118,16 @@ public class BinaryClient {
 		BinaryClient client = new BinaryClient("localhost", 8000);
 		client.connect();
 		BinaryRequestMessage obj = new BinaryRequestMessage();
-	//	Scanner s = new Scanner(System.in);
-		obj.setCommand(MsgCode.USER_SEARCH_CODE);
-		//obj.setValue("id", "10");
-		obj.setValue("nickname", "w");
+		Scanner s = new Scanner(System.in);
+		obj.setCommand(MsgCode.GET_FRIENDS);
+		obj.setValue("id", "7");
+		obj.setValue("fid", "7");
+		obj.setValue("accept", "1");
+		obj.setValue("username", "wangfff1rq");
+//		obj.setValue("nickname", "w");
 		obj.setValue("start", "0");
 		obj.setValue("limit", "4");
-//		obj.setValue("password", "wang123");
+		obj.setValue("password", "wang123");
 //		obj.setValue("nickname", "王睿奇");
 //		obj.setValue("sex", "1");
 		client.write(obj);

@@ -1,14 +1,16 @@
 package way.service.util;
 
 import java.util.Iterator;
+import java.util.Map;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import way.service.bean.User;
 import way.service.bean.Users;
 
-public class String2Model {
-	public static Users json2Users(String usersS) {
+public class ModelTrans {
+
+	public static Users json2Users(String usersS) {// 搜索获取用户列表时字符串转换为Users
 		Users users = new Users();
 		JSONArray a = JSONArray.fromObject("[]");
 		JSONArray array = JSONArray.fromObject(usersS);
@@ -28,8 +30,32 @@ public class String2Model {
 			if (jobj.containsKey("sex")) {
 				user.setSex(jobj.getString("sex").charAt(0));
 			}
+			if (jobj.containsKey("datetime")) {
+				user.setDatetime(jobj.getString("datetime"));
+			}
 			users.addUser(user);
 		}
 		return users;
+	}
+
+	public static User Map2User(Map<String, String> values) {// responseMsg
+																// 的values转化为User
+		User user = new User();
+		if (values.containsKey("id")) {
+			user.setId(Integer.parseInt(values.get("id")));
+		}
+		if (values.containsKey("name")) {
+			user.setName(values.get("name"));
+		}
+		if (values.containsKey("nick")) {
+			user.setNick(values.get("nick"));
+		}
+		if (values.containsKey("sex")) {
+			user.setSex(values.get("sex").charAt(0));
+		}
+		if (values.containsKey("datetime")) {
+			user.setDatetime(values.get("datetime"));
+		}
+		return user;
 	}
 }

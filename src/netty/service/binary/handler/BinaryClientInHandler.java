@@ -7,7 +7,7 @@ import way.service.bean.User;
 import way.service.bean.Users;
 import way.service.logic.WayService;
 import way.service.util.MsgCode;
-import way.service.util.String2Model;
+import way.service.util.ModelTrans;
 
 import netty.service.message.BinaryRequestMessage;
 import netty.service.message.BinaryResponseMessage;
@@ -20,9 +20,11 @@ public class BinaryClientInHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
 		System.out.println("read:" + (BinaryResponseMessage) msg);
-		Users users = String2Model.json2Users(((BinaryResponseMessage) msg)
+//		User user = ModelTrans.Map2User(((BinaryResponseMessage) msg).getValues());
+//		System.out.println(user);
+		Users users = ModelTrans.json2Users(((BinaryResponseMessage) msg)
 				.getValue("users"));
-		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
+//		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
 		System.out.println(users.toString());
 	}
 

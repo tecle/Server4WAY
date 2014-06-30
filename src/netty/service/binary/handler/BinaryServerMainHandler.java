@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import way.service.bean.User;
+import way.service.channel.ClientChannels;
 import way.service.logic.WayService;
 import way.service.util.MsgCode;
 
@@ -17,7 +18,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 public class BinaryServerMainHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println("read:" + (BinaryRequestMessage) msg);
+		System.out.println("read:main" + (BinaryRequestMessage) msg);
 		BinaryRequestMessage m = (BinaryRequestMessage) msg;
 		BinaryResponseMessage response = new BinaryResponseMessage();
 		Map<String, String> values = m.getValues();
@@ -26,8 +27,10 @@ public class BinaryServerMainHandler extends ChannelInboundHandlerAdapter {
 			if (WayService.getService().login((String) values.get("username"),
 					(String) values.get("password"))) {
 				response.setResult(MsgCode.LOGIN_SUCCESS);
-				response.setValues(WayService.getService().getUserByName(
-						(String) values.get("username")));
+				Map<String, String> user = WayService.getService().getUserByName(
+						(String) values.get("username"));
+				response.setValues(user);
+				ClientChannels.setChannel(user.get("id"), ctx.channel());
 			} else {
 				response.setResult(MsgCode.LOGIN_FAILED);
 			}
@@ -89,26 +92,28 @@ public class BinaryServerMainHandler extends ChannelInboundHandlerAdapter {
 			} else {
 				response.setResult(MsgCode.WRONG_PARAMETER);
 			}
+			break;
+		case MsgCode.GET_USER_INFO://获取好友信息
+			if(values.containsKey("id")){
+				Map user = WayService.getService().getUserById(
+						Integer.valueOf((String) values.get("id")));
+				if (user == null) {
+					response.setResult(MsgCode.GET_USER_INFO_FAILED);
+				} else {
+					response.setValues(user);
+					response.setResult(MsgCode.GET_USER_INFO_SUCCESS);
+				}
+			}else{
+				response.setResult(MsgCode.WRONG_PARAMETER);
+			}
+			break;
+		default:
+			ctx.fireChannelRead(msg);
+			return;
 		}
 		ctx.writeAndFlush(response);
 	}
 
-	@Override
-	public void userEventTriggered(ChannelHandlerContext ctx, Object evt)
-			throws Exception {
-		if (evt instanceof IdleStateEvent) {
-			IdleStateEvent event = (IdleStateEvent) evt;
-			if (event.state().equals(IdleState.READER_IDLE)) {
-				System.out.println("READER_IDLE");
-				// 超时关闭channel
-				ctx.close();
-			} else if (event.state().equals(IdleState.WRITER_IDLE)) {
-				System.out.println("WRITER_IDLE");
-				ctx.writeAndFlush("ping");
-			}
-		}
-		super.userEventTriggered(ctx, evt);
-	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {

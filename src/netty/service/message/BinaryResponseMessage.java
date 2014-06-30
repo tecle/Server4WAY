@@ -27,6 +27,11 @@ public class BinaryResponseMessage {
 
 	private String ip;
 
+	public BinaryResponseMessage(){}
+
+	public BinaryResponseMessage(int result){
+		this.result = result;
+	}
 	public void setValue(String key, String value) {
 		values.put(key, value);
 	}
