@@ -16,10 +16,11 @@ public class BinaryServer {  //netty服务器
             b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)   
                     .childHandler(new BinaryServerInitializer()).option(ChannelOption.SO_BACKLOG, 128) // (5)   
                     .childOption(ChannelOption.SO_KEEPALIVE, true);    
-  
+            System.out.println("server start up.....");
             ChannelFuture f = b.bind(port).sync();   
   
             f.channel().closeFuture().sync();  
+            
         } finally {  
             workerGroup.shutdownGracefully();  
             bossGroup.shutdownGracefully();  
