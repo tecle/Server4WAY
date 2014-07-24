@@ -27,8 +27,7 @@ public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 								values.get("id").toString(),
 								values.get("fid").toString())) {
 					response.setResult(MsgCode.ADD_FRIEND_SUCCESS);
-
-					ClientChannels.write(values.get("fid").toString(),
+					WayService.getService().pushToId(values.get("fid").toString(),
 							new BinaryResponseMessage(MsgCode.PUSH_FRIEND_REQ));
 				} else {
 					response.setResult(MsgCode.ADD_FRIEND_FAILED);
@@ -44,7 +43,7 @@ public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 						values.get("id").toString(),
 						Integer.valueOf(values.get("start")),
 						Integer.valueOf(values.get("limit")));
-				if (list == null) {
+				if (null == list) {
 					response.setResult(MsgCode.GET_FRIEND_REQ_FAILED);
 				} else {
 					response.setValue("users", list);
@@ -97,7 +96,7 @@ public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 				String list = WayService.getService().getFriends(
 						values.get("id"), Integer.valueOf(values.get("start")),
 						Integer.valueOf(values.get("limit")));
-				if (list == null) {
+				if (null == list) {
 					response.setResult(MsgCode.GET_FRIENDS_FAILED);
 				} else {
 					response.setValue("users", list);

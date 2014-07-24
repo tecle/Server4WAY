@@ -7,6 +7,8 @@ public class User {
 	private String datetime;
 	private char sex;
 	private int id;
+	private double longi;
+	private double lati;
 
 	public String getName() {
 		return name;
@@ -55,12 +57,30 @@ public class User {
 	public String getDatetime() {
 		return datetime;
 	}
+	
+	public void setLongi(double longi) {
+		this.longi = longi;
+	}
+
+	public double getLongi() {
+		return longi;
+	}
+
+	public void setLati(double lati) {
+		this.lati = lati;
+	}
+
+	public double getLati() {
+		return lati;
+	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				"[id=%s, name=%s, pw=%s, nick=%s, sex=%s, datetime=%s]", id,
-				name, pw, nick, sex, datetime);
+				"[id=%s, name=%s, pw=%s, nick=%s, sex=%s, datetime=%s, longi=%s, lati=%s]", id,
+				name, pw, nick, sex, datetime, longi, lati);
 	}
+
+	
 
 }

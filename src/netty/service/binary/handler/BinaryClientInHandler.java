@@ -22,10 +22,10 @@ public class BinaryClientInHandler extends ChannelInboundHandlerAdapter {
 		System.out.println("read:" + (BinaryResponseMessage) msg);
 //		User user = ModelTrans.Map2User(((BinaryResponseMessage) msg).getValues());
 //		System.out.println(user);
-		Users users = ModelTrans.json2Users(((BinaryResponseMessage) msg)
-				.getValue("users"));
+//		Users users = ModelTrans.json2Users(((BinaryResponseMessage) msg)
+//				.getValue("users"));
 //		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
-		System.out.println(users.toString());
+	//	System.out.println(users.toString());
 	}
 
 	@Override

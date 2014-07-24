@@ -296,20 +296,22 @@ public class WayDao {
 		return rtn == 1;
 	}
 
-	public List<Map<String,String>> getFriends(String id, Integer start, Integer limit) {
+	public List<Map<String, String>> getFriends(String id, Integer start,
+			Integer limit) {//获取好友列表
 		String sql = String
 				.format(
 						"select a.fid1 as fid1,b.nick as nick1,a.fid2 as fid2, c.nick as nick2 from %s a left join %s b on a.fid1=b.id  left join %s c on a.fid2=c.id where a.fid1='%s' or a.fid2='%s' limit %s offset %s",
-						friend_table, user_table, user_table,id, id, limit, start);
-		List<Map<String,String>> l = new ArrayList<Map<String, String>>();		
+						friend_table, user_table, user_table, id, id, limit,
+						start);
+		List<Map<String, String>> l = new ArrayList<Map<String, String>>();
 		try {
 			ResultSet rs = conn.execute(sql);
 			while (rs.next()) {
 				Map<String, String> m = new HashMap<String, String>();
-				if(rs.getString("fid1").equals(id)){
+				if (rs.getString("fid1").equals(id)) {
 					m.put("id", rs.getString("fid2"));
 					m.put("nick", rs.getString("nick2"));
-				}else{
+				} else {
 					m.put("id", rs.getString("fid1"));
 					m.put("nick", rs.getString("nick1"));
 				}
@@ -321,4 +323,34 @@ public class WayDao {
 		}
 		return l;
 	}
+
+	public boolean updatePosition(String id, String longi, String lati) {// 更新位置信息
+		String sql = String.format(
+				"update %s set longi='%s', lati='%s' where id='%s'",
+				user_table, longi, lati, id);
+		int rtn = conn.executeUpdate(sql);
+		return rtn == 1;
+	}
+
+	public Map getPosition(String id) {//获取位置信息
+		String sql = String.format("select * from %s where id='%s'", user_table, id);
+		logger.info(sql);
+		try {
+			ResultSet rs = conn.execute(sql);
+			rs.next();
+			if (rs == null) {
+				return null;
+			}
+			Map<String, String> rtn = new HashMap<String, String>();
+			rtn.put("id", rs.getString("id"));
+			rtn.put("longi", rs.getString("longi"));
+			rtn.put("lati", rs.getString("lati"));
+			return rtn;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 }

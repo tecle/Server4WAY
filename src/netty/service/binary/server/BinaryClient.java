@@ -119,17 +119,16 @@ public class BinaryClient {
 		client.connect();
 		BinaryRequestMessage obj = new BinaryRequestMessage();
 		Scanner s = new Scanner(System.in);
-		obj.setCommand(MsgCode.GET_FRIENDS);
+		obj.setCommand(MsgCode.SEND_CHAT);
+		obj.setValue("username", "Wang");
+		obj.setValue("password", "wang");
+		obj.setValue("fid", "6");
 		obj.setValue("id", "7");
-		obj.setValue("fid", "7");
-		obj.setValue("accept", "1");
-		obj.setValue("username", "wangfff1rq");
-//		obj.setValue("nickname", "w");
-		obj.setValue("start", "0");
-		obj.setValue("limit", "4");
-		obj.setValue("password", "wang123");
-//		obj.setValue("nickname", "王睿奇");
-//		obj.setValue("sex", "1");
+		obj.setValue("nick", "Www");
+		obj.setValue("message", "just test");
+	
+		
+
 		client.write(obj);
 	}
 }

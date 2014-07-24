@@ -53,10 +53,35 @@ public class MsgCode{
 	public final static int GET_FRIENDS_SUCCESS = 115;
 	public final static int GET_FRIENDS_FAILED = 215;
 	
+	//update position
+	public final static int UPDATE_POSITION = 21;
+	public final static int UPDATE_POSITION_SUCCESS = 121;
+	public final static int UPDATE_POSITION_FAILED = 221;
+	
+	//get position
+	public final static int GET_POSITION = 22;
+	public final static int GET_POSITION_SUCCESS = 122;
+	public final static int GET_POSITION_FAILED = 222;
+	
+	//send chat
+	public final static int SEND_CHAT = 31;
+	public final static int SEND_CHAT_SUCCESS = 131;
+	public final static int SEND_CHAT_FAILED = 231;
+	
+	//send group chat
+	public final static int SEND_GROUP_CHAT = 32;
+	public final static int SEND_GROUP_CHAT_SUCCESS = 132;
+	public final static int SEND_GROUP_CHAT_FAILED = 232;
 	//server request********************************************
 	//friend tip
 	public final static int PUSH_FRIEND_REQ = 301;
 	
-	//system error*********************
+	//chat
+	public final static int PUSH_CHAT = 311;
+	
+	//group chat
+	public final static int PUSH_GROUP_CHAT = 312;
+	
+	//system error********************* 
 	public final static int WRONG_PARAMETER = 401;
 }

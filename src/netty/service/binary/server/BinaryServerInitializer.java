@@ -1,10 +1,12 @@
 package netty.service.binary.server;
 import java.util.concurrent.TimeUnit;
 
+import netty.service.binary.handler.BinaryServerChatHandler;
 import netty.service.binary.handler.BinaryServerFriendHandler;
 import netty.service.binary.handler.BinaryServerHeartInHandler;
 import netty.service.binary.handler.BinaryServerMainHandler;
 import netty.service.binary.handler.BinaryServerOutboundHandler;
+import netty.service.binary.handler.BinaryServerPositionHandler;
 import netty.service.decoder.BinaryRequestDecoder;
 import netty.service.encoder.BinaryResponseEncoder;
 import netty.service.http.handler.HttpServerInboundHandler;
@@ -27,7 +29,9 @@ public class BinaryServerInitializer extends ChannelInitializer<SocketChannel> {
         ch.pipeline().addLast("heart", new BinaryServerHeartInHandler());//心跳处理
         ch.pipeline().addLast("inHandler", new BinaryServerMainHandler());//主要逻辑，包括登陆，注册等
         ch.pipeline().addLast("friendHanlder", new BinaryServerFriendHandler());//处理好友请求的逻辑
-        
+        ch.pipeline().addLast("positionHanlder", new BinaryServerPositionHandler());//处理位置信息的逻辑
+        ch.pipeline().addLast("chatHanlder", new BinaryServerChatHandler());//处理聊天的逻辑
+       
         
 	}  
 

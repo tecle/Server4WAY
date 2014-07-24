@@ -33,6 +33,12 @@ public class ModelTrans {
 			if (jobj.containsKey("datetime")) {
 				user.setDatetime(jobj.getString("datetime"));
 			}
+			if (jobj.containsKey("longi")) {
+				user.setLongi(Double.parseDouble(jobj.getString("longi")));
+			}
+			if (jobj.containsKey("lati")) {
+				user.setLati(Double.parseDouble(jobj.getString("lati")));
+			}
 			users.addUser(user);
 		}
 		return users;
@@ -55,6 +61,12 @@ public class ModelTrans {
 		}
 		if (values.containsKey("datetime")) {
 			user.setDatetime(values.get("datetime"));
+		}
+		if (values.containsKey("longi")) {
+			user.setLongi(Double.parseDouble(values.get("longi")));
+		}
+		if (values.containsKey("lati")) {
+			user.setLati(Double.parseDouble(values.get("datetime")));
 		}
 		return user;
 	}
