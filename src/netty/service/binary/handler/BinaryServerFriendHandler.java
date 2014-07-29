@@ -14,7 +14,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println("read:friend" + (BinaryRequestMessage) msg);
 		BinaryRequestMessage m = (BinaryRequestMessage) msg;
 		BinaryResponseMessage response = new BinaryResponseMessage();
 		Map<String, String> values = m.getValues();
@@ -27,7 +26,12 @@ public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 								values.get("id").toString(),
 								values.get("fid").toString())) {
 					response.setResult(MsgCode.ADD_FRIEND_SUCCESS);
-					WayService.getService().pushToId(values.get("fid").toString(),
+					Map<String, String> user = WayService.getService().getUserById(
+							Integer.parseInt(values.get("fid")));
+					response.setValue("nick", user.get("nick"));
+					response.setValue("id", user.get("id"));
+					WayService.getService().pushToId(
+							values.get("fid").toString(),
 							new BinaryResponseMessage(MsgCode.PUSH_FRIEND_REQ));
 				} else {
 					response.setResult(MsgCode.ADD_FRIEND_FAILED);
@@ -110,6 +114,7 @@ public class BinaryServerFriendHandler extends ChannelInboundHandlerAdapter {
 			ctx.fireChannelRead(msg);
 			return;
 		}
+		System.out.println("read:friend" + (BinaryRequestMessage) msg);
 		ctx.writeAndFlush(response);
 	}
 

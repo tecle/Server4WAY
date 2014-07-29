@@ -16,7 +16,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class BinaryServerChatHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println("read:chat" + (BinaryRequestMessage) msg);
 		BinaryRequestMessage m = (BinaryRequestMessage) msg;
 		BinaryResponseMessage response = new BinaryResponseMessage();
 		Map<String, String> values = m.getValues();
@@ -45,6 +44,7 @@ public class BinaryServerChatHandler extends ChannelInboundHandlerAdapter {
 			ctx.fireChannelRead(msg);
 			return;
 		}
+		System.out.println("read:chat" + (BinaryRequestMessage) msg);
 		ctx.writeAndFlush(response);
 	}
 

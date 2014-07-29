@@ -3,6 +3,9 @@ package netty.service.binary.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import way.service.bean.AInvites;
+import way.service.bean.MActivities;
+import way.service.bean.MActivity;
 import way.service.bean.User;
 import way.service.bean.Users;
 import way.service.logic.WayService;
@@ -22,10 +25,10 @@ public class BinaryClientInHandler extends ChannelInboundHandlerAdapter {
 		System.out.println("read:" + (BinaryResponseMessage) msg);
 //		User user = ModelTrans.Map2User(((BinaryResponseMessage) msg).getValues());
 //		System.out.println(user);
-//		Users users = ModelTrans.json2Users(((BinaryResponseMessage) msg)
-//				.getValue("users"));
-//		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
-	//	System.out.println(users.toString());
+//		AInvites a = ModelTrans.json2Invites(((BinaryResponseMessage) msg)
+//				.getValue("invites"));
+////		System.out.println(((BinaryResponseMessage) msg).getValue("users"));
+//		System.out.println(a.toString());
 	}
 
 	@Override

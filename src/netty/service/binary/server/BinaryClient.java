@@ -119,15 +119,13 @@ public class BinaryClient {
 		client.connect();
 		BinaryRequestMessage obj = new BinaryRequestMessage();
 		Scanner s = new Scanner(System.in);
-		obj.setCommand(MsgCode.SEND_CHAT);
-		obj.setValue("username", "Wang");
-		obj.setValue("password", "wang");
-		obj.setValue("fid", "6");
-		obj.setValue("id", "7");
-		obj.setValue("nick", "Www");
-		obj.setValue("message", "just test");
-	
-		
+		obj.setCommand(MsgCode.OPERATE_ACTIVITY_INVITE);
+		obj.setValue("uid", "10");
+		obj.setValue("accept", "0");
+//		obj.setValue("members", "11,10");
+		obj.setValue("aid", "4");
+//		obj.setValue("nick", "Www");
+		obj.setValue("note", "just test");	
 
 		client.write(obj);
 	}

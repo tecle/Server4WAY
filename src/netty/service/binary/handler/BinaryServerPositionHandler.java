@@ -14,7 +14,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 public class BinaryServerPositionHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		System.out.println("read:position" + (BinaryRequestMessage) msg);
 		BinaryRequestMessage m = (BinaryRequestMessage) msg;
 		BinaryResponseMessage response = new BinaryResponseMessage();
 		Map<String, String> values = m.getValues();
@@ -49,6 +48,7 @@ public class BinaryServerPositionHandler extends ChannelInboundHandlerAdapter {
 			ctx.fireChannelRead(msg);
 			return;
 		}
+		System.out.println("read:position" + (BinaryRequestMessage) msg);
 		ctx.writeAndFlush(response);
 	}
 

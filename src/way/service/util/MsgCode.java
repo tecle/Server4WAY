@@ -68,10 +68,46 @@ public class MsgCode{
 	public final static int SEND_CHAT_SUCCESS = 131;
 	public final static int SEND_CHAT_FAILED = 231;
 	
-	//send group chat
-	public final static int SEND_GROUP_CHAT = 32;
-	public final static int SEND_GROUP_CHAT_SUCCESS = 132;
-	public final static int SEND_GROUP_CHAT_FAILED = 232;
+	//send activity chat
+	public final static int SEND_ACTIVITY_CHAT = 32;
+	public final static int SEND_ACTIVITY_CHAT_SUCCESS = 132;
+	public final static int SEND_ACTIVITY_CHAT_FAILED = 232;
+	
+	//create activity
+	public final static int CREATE_ACTIVITY = 41;
+	public final static int CREATE_ACTIVITY_SUCCESS = 141;
+	public final static int CREATE_ACTIVITY_FAILED = 241;
+	
+	//invite to join activity
+	public final static int INVITE_TO_ACTIVITY = 42;
+	public final static int INVITE_TO_ACTIVITY_SUCCESS = 142;
+	public final static int INVITE_TO_ACTIVITY_FAILED = 242;
+	
+	//get activity members
+	public final static int	GET_ACTIVITY_INFO = 43;
+	public final static int GET_ACTIVITY_INFO_SUCCESS = 143;
+	public final static int GET_ACTIVITY_INFO_FAILED = 243;
+	
+	//get activities
+	public final static int GET_ACTIVITIES = 44;
+	public final static int GET_ACTIVITIES_SUCCESS = 144;
+	public final static int GET_ACTIVITIES_FAILED = 244;
+	
+	//get activity invites
+	public final static int GET_ACTIVITY_INVITES = 45;
+	public final static int GET_ACTIVITY_INVITES_SUCCESS = 145;
+	public final static int GET_ACTIVITY_INVITES_FAILED = 245;
+	
+	//delte member from activity
+	public final static int DELETE_ACTIVITY_MEMBER = 46;
+	public final static int DELETE_ACTIVITY_MEMBER_SUCCESS = 146;
+	public final static int DELETE_ACTIVITY_MEMBER_FAILED = 246;
+	
+	//operate activity invite
+	public final static int OPERATE_ACTIVITY_INVITE = 47;
+	public final static int OPERATE_ACTIVITY_INVITE_SUCCESS = 147;
+	public final static int OPERATE_ACTIVITY_INVITE_FAILED = 247;
+	
 	//server request********************************************
 	//friend tip
 	public final static int PUSH_FRIEND_REQ = 301;
@@ -79,8 +115,14 @@ public class MsgCode{
 	//chat
 	public final static int PUSH_CHAT = 311;
 	
-	//group chat
-	public final static int PUSH_GROUP_CHAT = 312;
+	//activity chat
+	public final static int PUSH_ACTIVITY_CHAT = 312;
+	
+	//activity invite
+	public final static int PUSH_ACTIVITY_INVITE = 321;
+	
+	//members position
+	public final static int PUSH_MEMBERS_POSITION = 322;
 	
 	//system error********************* 
 	public final static int WRONG_PARAMETER = 401;
